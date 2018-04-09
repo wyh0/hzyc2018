@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+.table,.table td{border:1px solid skyblue;text-align:center;}
+.a1{width:650px ;height:600px;background:url(image/13.jpg);border:1px solid #dddddd;  margin:0px auto;  margin-top:120px;}
+.a2{width:300px;height:150px;
+      margin:0px auto;
+      margin-top:90px; 
+}
+a{ text-decoration:none;}
+.a3{width:150px;height:40px;background-color:aliceblue;margin-top:36px;margin-left:60px;text-align:center;line-height:40px;font-size:25px;font-weight:700;}
+.bt{width:980px ;height:187px;background:url(image/BT.jpg.jpg); margin:0px auto; margin-top:-10px;}
+.time{margin-top:-52px;margin-right:12px;}
+.a6{width:280px;height:181px;background:url(image/huodong.jpg);margin-top:-11px;margin-left:20px;}
+.zhuce{float:right;margin-right:100px;margin-top:-105px;}
+.denglu{float:left;margin-left:100px;margin-top:-135px;}  

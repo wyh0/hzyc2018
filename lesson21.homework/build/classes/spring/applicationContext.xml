@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+		
+		<!-- ssm:spring会去管理mybatis和springmvc
+		连接池：线程池，tomcat线程池，数据库连接池。池是一种可以放置很多个资源的容器。
+		数据库连接池：内部放置了很多连接数据库(mysql,oracle,sqlserver)的connection，close，commit
+		提供数据库最大的连接数，或者活跃状态数，等待超时时间。
+		spring使用连接池技术，有dbcp，c3p0
+		 -->
+		 
+		 <!-- 加载数据库配置文件 -->
+		 <context:property-placeholder location="classpath:db.properties"/>
+		 
+		<!-- sqlMapConfig.xml:事务管理者，数据源 -->
+		<bean name="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<!-- 在mybatis中驱动是driver属性，在spring中-->
+			<property name="driverClassName" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			
+			<!-- 使用数据库连接池，可以配置以下几种资源分配设置。 -->
+			<property name="maxActive" value="30"/>
+			<property name="maxIdle" value="10"/>
+			<property name="maxWait" value="3000"/>
+		</bean>
+		
+		<!-- 将得到的数据源配置提供给mybatis使用 -->
+		<!-- 1.spring管理mybatis：由spring去创建SqlSessionFactory/SqlSession，需要使用mybatis-spring的整合包(mybatis-spring.jar) -->
+		<bean name="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<!-- dataSource指定的就是上文配置的数据资源
+			ref通常指的是通过对象方式引入资源
+			 -->
+			<property name="dataSource" ref="basicDataSource"></property>
+			<!-- 由spring的Resource类加载sqlMapConfig.xml -->
+			<property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml"></property>
+		</bean>
+		
+		<!-- 配置mapper的扫描器 -->
+		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+			<!-- basePackge指定的是mapper.xml的包 -->
+			<property name="basePackage" value="com.hzyc.lesson21.mapper"></property>
+			<!-- 在sqlSessionFactoryBeanName属性值上指定上文配置好的sqlSessionFactoryBean-->
+			<!-- 使用value属性赋值通常是简单的数据类型 -->
+			<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"></property>
+		</bean>
+		
+</beans>

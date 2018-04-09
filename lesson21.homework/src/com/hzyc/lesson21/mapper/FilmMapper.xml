@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+	<mapper namespace="com.hzyc.lesson21.mapper.FilmMapper">
+		<insert id="insertFilm" parameterType="Film" >
+			insert into film values(#{id},#{name},#{director},#{country},#{time},#{language},#{starttime},#{overtime})
+		</insert>
+		
+		
+		<select id="queryFilm" resultType="Film"> 
+			select * from film
+		</select> 
+		
+		<select id="queryFilmById" parameterType="String" resultType="Film">
+			select * from film where id = #{id}
+		</select>
+		<select id="queryFilmById1" parameterType="String" resultType="Film">
+			select * from film where id = #{id}
+		</select>
+		
+		<update id="updateFilm" parameterType="Film">
+			update Film set name = #{name},director = #{director},country = #{country},time = #{time},language = #{language},starttime = #{starttime},overtime = #{overtime} where id = #{id}
+		</update>
+		<delete id="deleteFilm" parameterType="Film" >
+		delete from film  where id = #{id}
+		</delete>
+		
+	</mapper>

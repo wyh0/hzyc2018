@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+	"-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+	
+	<configuration>
+		<!-- typeAliases:别名 -->
+		<typeAliases>
+			<package name="com.hzyc.lesson21.bean"/>
+		</typeAliases>
+		<!-- environements-envionment(transactionManager/dataSource):运行环境 -->
+		<!-- mappers:注册sqlxml文件 -->
+		<!-- 在单使用mybatis时，环境和mapper是必须配置的，但是，如果和spring进行整合，那么不需要配置环境以及mapper属性
+		这些配置由spring去主动管理和加载。
+		【如果进行ssm整合，sqlMapConfig.xml可以不必创建。】
+		
+		
+		 -->
+		
+		
+		
+	</configuration>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<!-- mapper代理开发方式的几条规则：
+	1.mapper.xml和mapper.java必须同包且同名
+	2.mapper.xml的namespace必须是mapper.java的全限定名
+	3.mapper.xml中的sql的id必须和mapper.java中方法名一致
+	4.mapper.xml中sql语句的parameterType必须和mapper.java中方法上的参数类型保持一致
+	5.mapper.xml中sql语句的ResultType必须和mapper.java中方法上的返回值类型保持一致
+	 -->
+	
+	
+	<!-- namespace为mapper接口的全限定名，目的是通过namespace可以找到对应的接口，将接口和mapper.xml绑定在一起 -->
+	<mapper namespace="com.hzyc.lesson21.mapper.RegisterMapper">
+		<insert id="insertUser" parameterType="Register" >
+			insert into register values(#{id},#{username},#{password})
+		</insert>
+		<select id="queryUser" resultType="Register" parameterType="String"> 
+			select * from register where username= #{username} and password= #{password}
+		</select> 
+	</mapper>
+	
